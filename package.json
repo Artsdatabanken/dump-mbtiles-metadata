@@ -1,6 +1,6 @@
 {
   "name": "@artsdatabanken/dump-mbtiles-metadata",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Dump .mbtiles metadata tables",
   "bin": {
     "dump-mbtiles-metadata": "./dump-mbtiles-metadata.js"
@@ -12,7 +12,9 @@
   "engines": {
     "node": ">=8"
   },
-  "keywords": [],
+  "keywords": [
+    "mbtiles"
+  ],
   "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/bjornreppen)",
   "license": "MIT",
   "publishConfig": {

@@ -1,4 +1,4 @@
-# Scan .mbtiles
+# Dump .mbtiles metadata
 
 Reads the metadata table from all [.mbtiles](https://github.com/mapbox/mbtiles-spec) inside a directory. Outputs the metadata to console in JSON format.
 
