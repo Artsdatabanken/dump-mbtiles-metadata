@@ -1,6 +1,6 @@
 # Scan .mbtiles
 
-Reads all metadata from a folder of .mbtiles.  Outputs metadata table from all mbtiles files to console in JSON format.
+Reads all metadata from a folder of .mbtiles. Outputs metadata table from all mbtiles files to console in JSON format.
 
 ## Usage
 
@@ -29,6 +29,6 @@ Reads all metadata from a folder of .mbtiles.  Outputs metadata table from all m
     "json": "{...}"
   },
   "NA": {
-    ...
+    "...": "..."
   }
 ```
