@@ -1,0 +1,15 @@
+{
+  "name": "mbtile-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/Mashi)",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^4.1.4"
+  }
+}
