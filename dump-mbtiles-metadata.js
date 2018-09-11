@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const sqlite = require("better-sqlite3");
 const fs = require("fs");
 var path = require("path");

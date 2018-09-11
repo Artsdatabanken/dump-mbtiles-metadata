@@ -1,14 +1,23 @@
 {
-  "name": "mbtile-stats",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@artsdatabanken/dump-mbtiles-metadata",
+  "version": "1.0.4",
+  "description": "Dump .mbtiles metadata tables",
+  "bin": {
+    "dump-mbtiles-metadata": "./dump-mbtiles-metadata.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Artsdatabanken/dump-mbtiles-metadata.git"
+  },
+  "engines": {
+    "node": ">=8"
   },
   "keywords": [],
-  "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/Mashi)",
-  "license": "ISC",
+  "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/bjornreppen)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "better-sqlite3": "^4.1.4"
   }
