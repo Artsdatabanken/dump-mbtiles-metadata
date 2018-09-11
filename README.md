@@ -2,24 +2,23 @@
 
 Reads the metadata table from all [.mbtiles](https://github.com/mapbox/mbtiles-spec) inside a directory. Outputs the metadata to console in JSON format.
 
+
 ## Installation
 
-Install dependencies
-
 ```
- npm install
+ npm install -g @artsdatabanken/dump-mbtiles-metadata
 ```
 
 ## Usage
 
 ```
- node scan-mbtiles.js <directory>
+ dump-mbtiles-metadata <directory>
 ```
 
 ## Sample
 
 ```
-> node scan-mbtiles.js .
+> dump-mbtiles-metadata .
 ```
 
 ```json
