@@ -17,7 +17,6 @@ function dumpAllMetadata(mbtilesPath) {
     .readdirSync(mbtilesPath)
     .map(file => path.join(mbtilesPath, file))
     .filter(file => {
-      console.log(JSON.stringify(path.parse(file)))
       return fs.statSync(file).isFile() && path.extname(file) === ".mbtiles"
     })
     .reduce((acc, file) => {
