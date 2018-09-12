@@ -6,7 +6,10 @@ var path = require("path")
 function readMetadata(mbtilesPath) {
   const db = new sqlite(mbtilesPath)
   const rows = db.prepare("SELECT * FROM metadata").all()
-  return rows.reduce((acc, row) => (acc[row.name] = row.value), {})
+  return rows.reduce((acc, row) => {
+    acc[row.name] = row.value
+    return acc
+  }, {})
 }
 
 function dumpAllMetadata(mbtilesPath) {
