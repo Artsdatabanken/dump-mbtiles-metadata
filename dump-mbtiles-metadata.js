@@ -12,23 +12,25 @@ function readMetadata(mbtilesPath) {
   }, {})
 }
 
-function dumpAllMetadata(mbtilesPath) {
-  const meta = fs
+function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
+  return fs
     .readdirSync(mbtilesPath)
     .map(file => path.join(mbtilesPath, file))
-    .filter(file => {
-      return fs.statSync(file).isFile() && path.extname(file) === ".mbtiles"
-    })
     .reduce((acc, file) => {
-      acc[path.parse(file).name] = readMetadata(file)
+      if (fs.statSync(file).isDirectory()) {
+        dumpAllMetadata(basePath, file, acc)
+      } else if (path.extname(file) === ".mbtiles")
+        acc[path.relative(basePath, file)] = readMetadata(file)
       return acc
-    }, {})
-  console.log(JSON.stringify(meta))
+    }, acc)
 }
 
 try {
-  if (process.argv.length === 3) dumpAllMetadata(process.argv[2])
-  else throw new Error("Usage: node scan-mbtiles.js <directory>")
+  if (process.argv.length === 3) {
+    const sourcePath = process.argv[2]
+    const meta = dumpAllMetadata(sourcePath, sourcePath)
+    console.log(JSON.stringify(meta))
+  } else throw new Error("Usage: node scan-mbtiles.js <directory>")
 } catch (error) {
   console.error(error)
   process.exit(1)

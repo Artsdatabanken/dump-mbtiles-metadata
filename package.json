@@ -1,6 +1,6 @@
 {
   "name": "@artsdatabanken/dump-mbtiles-metadata",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Dump .mbtiles metadata tables",
   "bin": {
     "dump-mbtiles-metadata": "./dump-mbtiles-metadata.js"

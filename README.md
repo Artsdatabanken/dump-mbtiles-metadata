@@ -2,7 +2,6 @@
 
 Reads the metadata table from all [.mbtiles](https://github.com/mapbox/mbtiles-spec) inside a directory. Outputs the metadata to console in JSON format.
 
-
 ## Installation
 
 ```
@@ -12,8 +11,10 @@ Reads the metadata table from all [.mbtiles](https://github.com/mapbox/mbtiles-s
 ## Usage
 
 ```
- dump-mbtiles-metadata <directory>
+ dump-mbtiles-metadata <source .mbtiles directory>
 ```
+
+The metadata will be written to standard out.
 
 ## Sample
 
