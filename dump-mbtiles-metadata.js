@@ -4,12 +4,17 @@ const fs = require("fs")
 var path = require("path")
 
 function readMetadata(mbtilesPath) {
-  const db = new sqlite(mbtilesPath)
-  const rows = db.prepare("SELECT * FROM metadata").all()
-  return rows.reduce((acc, row) => {
-    acc[row.name] = row.value
-    return acc
-  }, {})
+  try {
+    const db = new sqlite(mbtilesPath)
+    const rows = db.prepare("SELECT * FROM metadata").all()
+    return rows.reduce((acc, row) => {
+      acc[row.name] = row.value
+      return acc
+    }, {})
+  } catch (error) {
+    console.error(`Error reading ${mbtilesPath}: ${error.message}`)
+    return { error: error.message }
+  }
 }
 
 function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
