@@ -22,13 +22,18 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
     .readdirSync(mbtilesPath)
     .map(file => path.join(mbtilesPath, file))
     .reduce((acc, file) => {
-      if (fs.statSync(file).isDirectory()) {
+      const stat = fs.statSync(file);
+      if (stat.isDirectory()) {
         dumpAllMetadata(basePath, file, acc);
         return acc;
       }
+      let rec = {
+        size: stat.size,
+        mtime: stat.mtime
+      };
       const ext = path.extname(file);
-      acc[path.relative(basePath, file)] =
-        ext === ".mbtiles" ? readMetadata(file) : {};
+      if (ext === ".mbtiles") rec = Object.assign(rec, readMetadata(file));
+      acc[path.relative(basePath, file)] = rec;
       return acc;
     }, acc);
 }
