@@ -4,6 +4,8 @@ Reads the metadata table from all [.mbtiles](https://github.com/mapbox/mbtiles-s
 
 ## Installation
 
+Package is hosted at https://www.npmjs.com/package/@artsdatabanken/dump-mbtiles-metadata
+
 ```
  npm install -g @artsdatabanken/dump-mbtiles-metadata
 ```
