@@ -24,7 +24,7 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
     .reduce((acc, file) => {
       if (fs.statSync(file).isDirectory()) {
         dumpAllMetadata(basePath, file, acc);
-        return;
+        return acc;
       }
       const ext = path.extname(file);
       acc[path.relative(basePath, file)] =
