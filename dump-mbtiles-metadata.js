@@ -27,7 +27,9 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
         dumpAllMetadata(basePath, file, acc);
         return acc;
       }
+      const fn = path.basename(file);
       let rec = {
+        filename: fn,
         size: stat.size,
         mtime: stat.mtime
       };
