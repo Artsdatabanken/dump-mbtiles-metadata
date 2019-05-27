@@ -34,14 +34,15 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
       }
       const fn = path.basename(file);
       let rec = {
-        filename: fn,
         size: stat.size,
         mtime: stat.mtime
       };
       const ext = path.extname(file);
       if (ext === ".mbtiles") rec = Object.assign(rec, readMetadata(file));
       const relPath = path.relative(basePath, file);
-      acc[path.dirname(relPath)] = rec;
+      const dir = path.dirname(relPath);
+      acc[dir] = acc[dir] || {};
+      acc[dir][fn] = rec;
       return acc;
     }, acc);
 }
