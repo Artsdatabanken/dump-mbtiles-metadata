@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+
+/*
+Reads all metadata from a directory structure containing .mbtiles and outputs metadata in JSON format.
+*/
+
 const sqlite = require("better-sqlite3");
 const fs = require("fs");
 var path = require("path");
@@ -35,7 +40,8 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
       };
       const ext = path.extname(file);
       if (ext === ".mbtiles") rec = Object.assign(rec, readMetadata(file));
-      acc[path.relative(basePath, file)] = rec;
+      const relPath = path.relative(basePath, file);
+      acc[path.dirname(relPath)] = rec;
       return acc;
     }, acc);
 }
