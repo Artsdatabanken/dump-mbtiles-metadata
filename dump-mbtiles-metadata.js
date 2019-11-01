@@ -8,10 +8,10 @@ const sqlite = require("better-sqlite3");
 const fs = require("fs");
 var path = require("path");
 
-function readMetadata(mbtilesPath) {
+function sqlite(mbtilesPath, sql) {
   try {
     const db = new sqlite(mbtilesPath);
-    const rows = db.prepare("SELECT * FROM metadata").all();
+    const rows = db.prepare(sql).all();
     return rows.reduce((acc, row) => {
       acc[row.name] = row.value;
       return acc;
@@ -20,6 +20,16 @@ function readMetadata(mbtilesPath) {
     console.error(`Error reading ${mbtilesPath}: ${error.message}`);
     return { error: error.message };
   }
+}
+
+function readMbtilesMetadata(mbtilesPath) {
+  const sql = "SELECT * FROM metadata";
+  return sqlite(mbtilesPath, sql);
+}
+
+function readSpatialiteMetadata(spatialitePath) {
+  const sql = "select * from vector_layers_statistics";
+  return sqlite(mbtilesPath, sql);
 }
 
 function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
@@ -38,7 +48,11 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
         mtime: stat.mtime
       };
       const ext = path.extname(file);
-      if (ext === ".mbtiles") rec = Object.assign(rec, readMetadata(file));
+      if (ext === ".mbtiles")
+        rec = Object.assign(rec, readMbtilesMetadata(file));
+      if (ext === ".sqlite")
+        // Spatialite
+        rec = Object.assign(rec, readSpatialiteMetadata(file));
       const relPath = path.relative(basePath, file);
       const dir = path.dirname(relPath);
       acc[dir] = acc[dir] || {};
