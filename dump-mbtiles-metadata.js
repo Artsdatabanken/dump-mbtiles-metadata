@@ -8,10 +8,11 @@ const sqlite = require("better-sqlite3");
 const fs = require("fs");
 var path = require("path");
 
-function sqlite(mbtilesPath, sql) {
+function sqliteQuery(mbtilesPath, sql) {
   try {
     const db = new sqlite(mbtilesPath);
     const rows = db.prepare(sql).all();
+    return rows[0];
     return rows.reduce((acc, row) => {
       acc[row.name] = row.value;
       return acc;
@@ -24,12 +25,12 @@ function sqlite(mbtilesPath, sql) {
 
 function readMbtilesMetadata(mbtilesPath) {
   const sql = "SELECT * FROM metadata";
-  return sqlite(mbtilesPath, sql);
+  return sqliteQuery(mbtilesPath, sql);
 }
 
 function readSpatialiteMetadata(spatialitePath) {
   const sql = "select * from vector_layers_statistics";
-  return sqlite(mbtilesPath, sql);
+  return sqliteQuery(spatialitePath, sql);
 }
 
 function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
