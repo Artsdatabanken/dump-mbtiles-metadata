@@ -12,11 +12,7 @@ function sqliteQuery(mbtilesPath, sql) {
   try {
     const db = new sqlite(mbtilesPath);
     const rows = db.prepare(sql).all();
-    return rows[0];
-    return rows.reduce((acc, row) => {
-      acc[row.name] = row.value;
-      return acc;
-    }, {});
+    return rows;
   } catch (error) {
     console.error(`Error reading ${mbtilesPath}: ${error.message}`);
     return { error: error.message };
@@ -25,12 +21,16 @@ function sqliteQuery(mbtilesPath, sql) {
 
 function readMbtilesMetadata(mbtilesPath) {
   const sql = "SELECT * FROM metadata";
-  return sqliteQuery(mbtilesPath, sql);
+  const rows = sqliteQuery(mbtilesPath, sql);
+  return rows.reduce((acc, row) => {
+    acc[row.name] = row.value;
+    return acc;
+  }, {});
 }
 
 function readSpatialiteMetadata(spatialitePath) {
   const sql = "select * from vector_layers_statistics";
-  return sqliteQuery(spatialitePath, sql);
+  return sqliteQuery(spatialitePath, sql)[0];
 }
 
 function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
