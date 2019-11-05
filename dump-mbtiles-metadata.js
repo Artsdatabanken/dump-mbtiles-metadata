@@ -71,10 +71,10 @@ try {
 function readMetadata(file) {
   try {
     const ext = path.extname(file);
-    if (ext === ".mbtiles") return readMbtilesMetadata(file));
+    if (ext === ".mbtiles") return readMbtilesMetadata(file);
     if (ext === ".sqlite")
       // Spatialite
-      return readSpatialiteMetadata(file));
+      return readSpatialiteMetadata(file);
   } catch (e) {
     console.error(e);
   }
