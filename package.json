@@ -1,6 +1,6 @@
 {
   "name": "@artsdatabanken/dump-mbtiles-metadata",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Scan directory structure and dump GIS map file metadata statistics to JSON",
   "bin": {
     "dump-mbtiles-metadata": "./dump-mbtiles-metadata.js"

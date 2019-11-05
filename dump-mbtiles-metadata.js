@@ -48,12 +48,7 @@ function dumpAllMetadata(basePath, mbtilesPath, acc = {}) {
         size: stat.size,
         mtime: stat.mtime
       };
-      const ext = path.extname(file);
-      if (ext === ".mbtiles")
-        rec = Object.assign(rec, readMbtilesMetadata(file));
-      if (ext === ".sqlite")
-        // Spatialite
-        rec = Object.assign(rec, readSpatialiteMetadata(file));
+      rec = Object.assign(rec, readMetadata(file));
       const relPath = path.relative(basePath, file);
       const dir = path.dirname(relPath);
       acc[dir] = acc[dir] || {};
@@ -71,4 +66,16 @@ try {
 } catch (error) {
   console.error(error);
   process.exit(1);
+}
+
+function readMetadata(file) {
+  try {
+    const ext = path.extname(file);
+    if (ext === ".mbtiles") rec = Object.assign(rec, readMbtilesMetadata(file));
+    if (ext === ".sqlite")
+      // Spatialite
+      rec = Object.assign(rec, readSpatialiteMetadata(file));
+  } catch (e) {
+    console.error(e);
+  }
 }
